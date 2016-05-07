@@ -29,18 +29,18 @@ Mappings consist of a simple javascript array containing mapping instructions:
         },
 		{'deep.childA': 'baby'}, //dot notation is currently only supported when renaming fields
 		function(srcObj,dstObj){
-			dstObj.CustomField = 'whatever'; //post mapping function ran after all the other maps are ran 
+			dstObj.CustomField = 'whatever'; //post mapping function ran after all the other maps are ran
 		}
 	]
-	
+
 ### Installation
 	npm install explicit-object-mapper
 
 ### usage
 
 	var explicitObjectMapper = require('explicit-object-mapper');
-	
-	var mapObj = 
+
+	var mapObj =
 	[
 		'simpleA',
 		{'oldname':'myVal'},
@@ -53,14 +53,14 @@ Mappings consist of a simple javascript array containing mapping instructions:
 
 	var mapper = explicitObjectMapper(mapObj);
 	var dstObj = mapper.map(srcObj);
-	
+
 The output from the above would be:
 
 	{
 		simpleA: 'alpha',
 		changedName: 'myVal'
 	}
-	
+
 
 If an array of objects is passed in then all objects will be mapped and returned in an array.
 
@@ -84,6 +84,9 @@ We can now add mappers inside maps, for example:
     ];
     var mappedObject = rootMap.map(objectToMap); // { IncompleteName: { Firstname: 'Bob' } }
 
+### changes in 2.0.0
+Now needs node > 4.2
+Uses es6 features to clean up codebase
 
 ### changes in 0.0.6
 
@@ -99,9 +102,9 @@ previously if a source value could be evaluated as false (null, 0, false) then t
 
 #### optional args to map
 map can be called with an optional options variable:
-	
+
 	mapper.map(srcObj, {myVal: true, myOtherVal:'biscuit'});
-	
+
 This object is then passed into any custom mapping functions:
 
 	[
@@ -115,7 +118,6 @@ This object is then passed into any custom mapping functions:
 			}
 		},
 		function(srcObj,dstObj, options){
-			dstObj.CustomField = 'whatever'; //post mapping function ran after all the other maps are ran 
+			dstObj.CustomField = 'whatever'; //post mapping function ran after all the other maps are ran
 		}
 	]
-
